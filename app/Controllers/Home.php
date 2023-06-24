@@ -27,11 +27,11 @@ class Home extends BaseController
         return $this->response->redirect(site_url('/'));	
       }else{
 			$item = array(
-        'id'              => $registro['id'],
+        'empleado_id'              => $registro['id'],
         'nombres'		      => $registro['nombres'],
         'apepat'		      => $registro['apellido_paterno'],
         'apemat'		      => $registro['apellido_materno'],
-        'tipo_empleado'   => $registro['tipo_empleado_id']
+        'tipo_empleado'   => $registro['tipo_empleado_id'],
 			);
 			$usuario = $item;
 			$session->set('usuario', $usuario);

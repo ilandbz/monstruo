@@ -33,11 +33,15 @@ $routes->get('/', 'Home::index');
 $routes->post('/login', 'Home::login');
 $routes->get('/logout', 'Home::logout');
 $routes->get('/inicio', 'Home::inicio');
-$routes->get('/entidades/index', 'Entidades::index');
 
+
+$routes->get('/entidades/index', 'Entidades::index');
+$routes->get('/entidades/modal_operacion/', 'Entidades::modal_operacion');
 $routes->group('WsVarios', ['namespace' => 'App\Controllers'], function ($routes) {
     $routes->get('datos_accesorios', 'WsVarios::datos_accesorios');
     $routes->get('suma_mensual/(:any)', 'WsVarios::suma_mensual/$1');
+    $routes->get('WS_tipo_entidades/select', 'WsVarios::select');
+    $routes->get('ws_select/(:any)/(:any)/(:any)/(:any)', 'WsVarios::ws_select/$1/$2/$3/$4');
 });
 
 

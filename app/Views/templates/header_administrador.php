@@ -71,7 +71,7 @@
                                                 </ul>
                                             </li>
                                     <?php } ?>    
-                                    <li><a href="<?PHP echo base_url(); ?>index.php/acceso/logout">Cerrar Sesión</a></li>
+                                    <li><a href="<?PHP echo base_url(); ?>logout">Cerrar Sesión</a></li>
                                 </ul>
                                 <ul class="nav navbar-nav navbar-right">                                    
                                     <?php                                                                                 
