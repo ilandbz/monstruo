@@ -1,6 +1,7 @@
 <?php
 namespace App\Controllers;
 use App\Models\VentaModel;
+
 class WsVarios extends BaseController
 {
     public function datos_accesorios(){

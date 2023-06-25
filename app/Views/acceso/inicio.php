@@ -33,7 +33,7 @@
 </div>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script src="<?PHP echo base_url(); ?>js/monstruo/help.js"></script>
-<script type="text/javascript">
+<!-- <script type="text/javascript">
     var base_url = '<?PHP echo base_url();?>';        
     
     $.getJSON(base_url + 'WsVarios/datos_accesorios')
@@ -176,5 +176,5 @@
           }
        });
     });
-</script>
+</script> -->
 <?= view($footer) ?>

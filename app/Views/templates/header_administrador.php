@@ -26,12 +26,12 @@
         <script src="<?php echo base_url(); ?>js/monstruo/config.js"></script>
 
         <style type="text/css" >
-        input[type=number]::-webkit-inner-spin-button, 
-        input[type=number]::-webkit-outer-spin-button { 
-          -webkit-appearance: none; 
-          margin: 0; 
-        }
-        input[type=number] { -moz-appearance:textfield; }
+            input[type=number]::-webkit-inner-spin-button, 
+            input[type=number]::-webkit-outer-spin-button { 
+            -webkit-appearance: none; 
+            margin: 0; 
+            }
+            input[type=number] { -moz-appearance:textfield;appearance:textfield }
         </style>                                                                                       
     </head>
     <body>

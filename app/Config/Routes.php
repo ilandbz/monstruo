@@ -40,9 +40,7 @@ $routes->group('WsVarios', ['namespace' => 'App\Controllers'], function ($routes
     $routes->get('suma_mensual/(:any)', 'WsVarios::suma_mensual/$1');
 });
 
-
-
-
+include_once __DIR__.'/router/AlmacenRoutes.php';
 
 /*
  * --------------------------------------------------------------------
