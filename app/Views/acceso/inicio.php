@@ -98,7 +98,7 @@
                 localStorage.setItem("datos_configuracion", JSON.stringify(data.datos_configuracion));
     });
     
-    $.getJSON(base_url + 'WS_tipo_entidades/select')
+    $.getJSON(base_url + 'WsVarios/WS_tipo_entidades/select')
             .done(function (data) {
                 localStorage.setItem("tipo_entidades", JSON.stringify(data.tipo_entidades));
     });

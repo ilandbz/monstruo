@@ -67,7 +67,7 @@
     </div>
 </div>
 
-<script src="<?PHP echo base_url(); ?>assets/js/monstruo/help.js"></script>
+<script src="<?PHP echo base_url(); ?>js/monstruo/help.js"></script>
 <script type="text/javascript">
     var base_url = '<?php echo base_url();?>';
     var total_filas = 0;
@@ -100,7 +100,7 @@
             param_tipo_entidad_id = ($('#buscar_tipo_entidades').val() == '') ? param_stand_url :  $('#buscar_tipo_entidades').val();
             $("#tabla_entidad_id > tbody").remove();
 
-            var ruta_url = base_url + 'index.php/WS_entidades/ws_select/' + pagina + '/' + filas_por_pagina + '/' + param_entidad_id + '/' + param_tipo_entidad_id;               
+            var ruta_url = base_url + 'WsVarios/ws_select/' + pagina + '/' + filas_por_pagina + '/' + param_entidad_id + '/' + param_tipo_entidad_id;               
             console.log(ruta_url);
             $.getJSON(ruta_url)
                 .done(function (data) {
@@ -130,7 +130,7 @@
             pagina = $(this).text();
             $("#tabla_entidad_id > tbody").remove();
 
-            var url_l = base_url + 'index.php/WS_entidades/ws_select/' + pagina + '/' + filas_por_pagina + '/' + param_entidad_id + '/' + param_tipo_entidad_id;
+            var url_l = base_url + 'WsVarios/ws_select/' + pagina + '/' + filas_por_pagina + '/' + param_entidad_id + '/' + param_tipo_entidad_id;
             console.log(url_l);            
             
             $.getJSON(url_l)
@@ -148,7 +148,7 @@
                 
         $("#tabla_entidad_id").on('click', '.btn_modificar_entidad', function(){
             entidad_id_pro = $(this).attr('id');
-            ruta_url = base_url + 'index.php/entidades/modal_operacion/';
+            ruta_url = base_url + 'entidades/modal_operacion/';
             $("#myModal").load(ruta_url);
         });
         
@@ -189,10 +189,10 @@
             $("#myModal").load(ruta_url);
             
             var url_l = base_url + 'index.php/WS_contactos/ws_select/' + entidad_id;
-            //console.log(url_l);
+
             $.getJSON(url_l)
                 .done(function (data) {
-                    //console.log(data);
+
                     $('#modal_cuenta_entidad').text(razon_social + ' - ' + numero_documento);
                     $('#modal_contacto_entidad_id').val(entidad_id);
                     sortJSON(data.ws_contactos, 'entidad_id', 'desc');
@@ -246,7 +246,11 @@
     
     function carga_inicial(){
         //CARGA INICIAL
-        var url_l = base_url + 'index.php/WS_entidades/ws_select/' + pagina_inicial + '/' + filas_por_pagina + '/' + param_stand_url + '/' + param_stand_url + '/' + param_stand_url;
+
+        //var url_l = base_url + 'index.php/WS_entidades/ws_select/' + pagina_inicial + '/' + filas_por_pagina + '/' + param_stand_url + '/' + param_stand_url + '/' + param_stand_url; 
+        //var url_l = base_url + 'index.php/WS_entidades/ws_select/' + pagina + '/' + filas_por_pagina + '/' + param_entidad_id + '/' + param_tipo_entidad_id;
+        
+        var url_l = base_url + 'WsVarios/ws_select/' + pagina_inicial + '/' + filas_por_pagina + '/' + param_stand_url + '/' + param_stand_url + '/' + param_stand_url;
         $.getJSON(url_l)
             .done(function (data) {
                 //sortJSON(data.ws_select_entidades, 'entidad_id', 'desc');
