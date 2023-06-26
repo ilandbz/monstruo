@@ -13,7 +13,9 @@ class CategoriaModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [];
+    protected $allowedFields    = [
+        'codigo','categoria','imagen','eliminado'
+    ];
 
     // Dates
     protected $useTimestamps = false;

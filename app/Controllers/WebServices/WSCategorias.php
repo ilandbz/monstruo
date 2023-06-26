@@ -3,25 +3,19 @@
 namespace App\Controllers\WebServices;
 
 use App\Controllers\BaseController;
-use App\Models\CategoriaModel;
+use App\Helpers\WSQueries;
 
 class WSCategorias extends BaseController
 {
-    private CategoriaModel $categoria_model;
-
-    public function __construct()
-    {
-        $this->categoria_model = new CategoriaModel();
-    }
+    public function __construct() {}
 
     public function wsSelect()
     {                      
         $pagina = (int) $this->request->getGet('page');
         $filas_por_pagina = (int) $this->request->getGet('paginacion');
-        $buscar = (string)$this->request->getGet('buscar');
+        $categoria_id = (int)$this->request->getGet('categoria_id');
 
-        $data = array();
-        $data = $this->selectCategorias($pagina,$filas_por_pagina,$buscar);
+        $data = WSQueries::selectPagination('categorias',$pagina,$filas_por_pagina,$categoria_id);
 
         echo json_encode(
             [
@@ -32,16 +26,41 @@ class WSCategorias extends BaseController
         );
     }
 
-    public function selectCategorias(int $pagina,int $filas_por_pagina,string $buscar)
-    {        
-        $categorias =$this->categoria_model->paginate($filas_por_pagina);
-        
-        $total_categorias = $this->categoria_model->countAllResults();
-        return array(
-            'data' => $categorias,
-            'total_filas' => $this->categoria_model->countAllResults(),
-            'pager' =>  $this->categoria_model->pager
+    public function wsItem() 
+    {
+        $condicion = array('id' => $this->request->getGet('id'));
+
+        $data = WSQueries::select('categorias',2,"*",$condicion,"");
+
+        echo json_encode(
+            array(
+                'categoria_id' => $data->id,
+                'categoria' => $data->categoria,
+                'codigo' => $data->codigo
+            )
         );
-        
+    }
+
+    public function wsBuscador()
+    {
+        $buscar = (string)$this->request->getGet('term');
+
+        $condicion = array('categoria' => $buscar);
+
+        $data = WSQueries::buscador($buscar,'categorias',$condicion);
+
+        echo json_encode($data);
+    }
+
+    public function deleteItem()
+    {
+        $condicion = array( 'id' => $this->request->getPost('id'));
+        $data = array('eliminado' => 1);
+
+        $resultado = WSQueries::modificar('categorias',$condicion,$data);
+
+        echo json_encode(array(
+            'resultado' => $resultado
+        ));
     }
 }

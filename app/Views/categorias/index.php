@@ -18,7 +18,9 @@
 <div class="container">
     <div class="row">
         <div class="col-md-4">
-            <button id="btn_nueva_categoria" class="btn btn-success btn-sm" data-toggle="modal" data-target="#myModal" data-backdrop="static" data-keyboard="false">Nueva Categoria</button>
+            <button id="btn_nueva_categoria" class="btn btn-success btn-sm" >
+                <i class="glyphicon glyphicon-plus"></i>&nbsp;Nueva Categoria
+            </button>
         </div>
 
         <div class="col-md-1" >
@@ -57,5 +59,9 @@
         </ul>
     </div>
 </div>
+
+<?= view($modal_operacion) ?>
+
 <?= view($footer) ?>
+
 <?= view($script) ?>

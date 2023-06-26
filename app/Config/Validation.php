@@ -31,7 +31,7 @@ class Validation extends BaseConfig
      * Specifies the views that are used to display the
      * errors.
      *
-     * @var array<string, string>
+     * @var array<string, string>z
      */
     public array $templates = [
         'list'   => 'CodeIgniter\Validation\Views\list',
