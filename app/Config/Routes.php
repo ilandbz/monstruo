@@ -45,6 +45,7 @@ $routes->group('WsVarios', ['namespace' => 'App\Controllers'], function ($routes
 });
 
 include_once __DIR__.'/router/AlmacenRoutes.php';
+include_once __DIR__.'/router/EntidadRoutes.php';
 
 /*
  * --------------------------------------------------------------------

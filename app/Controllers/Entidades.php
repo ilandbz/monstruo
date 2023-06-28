@@ -8,7 +8,6 @@ class Entidades extends BaseController
         $session = session();
         if($session->has('usuario')){
             $empresamodel = new EmpresaModel();
-
             $data['session'] = session('usuario');
             $data['empresa'] = $empresamodel->first();        
             $data['header'] = 'templates/header_administrador';

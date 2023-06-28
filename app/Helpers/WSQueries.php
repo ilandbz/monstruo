@@ -10,28 +10,59 @@ class WSQueries
 
     public function __construct() {}
 
-    public static function selectPagination(string $tabla,int $pagina,int $filas_por_pagina,int $id): array
+    public static function selectPagination(string $tabla,int $pagina,int $filas_por_pagina,array $condicion = array(),int $id): array
     {
         self::$db = Database::connect();
-
         $pager = service('pager');
-        
         $offset = ($pagina-1)*$filas_por_pagina;
+       if ($condicion == '')
+            $condicion = array();
 
-        $condicion = ($id != null || $id!= '') ? array('id' => $id) : array() ;
-
-        $builder = self::$db->table($tabla)->where('eliminado',0)->where($condicion);
-
+        // $condiciones = [ "1"  => "1"];        
+        // $condiciones = array_merge($condiciones, $condicion);
+        $builder = self::$db->table($tabla)->where($condicion);
         $record = $builder->get($filas_por_pagina,$offset)->getResult();
-
-        $total_records = self::$db->table($tabla)->where('eliminado',0)->where($condicion)->countAllResults();   
-
+        $total_records = self::$db->table($tabla)->where($condicion)->countAllResults();   
         return array(
             'data' => $record,
             'total_filas' => $total_records,
             'pager' => $pager->makeLinks($pagina,$filas_por_pagina,$total_records)
         );
     }
+
+    public static function queryResultPaginado(string $consulta, int $pagina,int $filas_por_pagina): array
+    {
+        self::$db = Database::connect();
+        $pager = service('pager');
+        $offset = ($pagina-1)*$filas_por_pagina;
+
+
+
+        $consulta = $consulta." LIMIT ".$filas_por_pagina." OFFSET ".$offset.";";
+
+        $record = self::$db->query($consulta)->getResult();
+
+
+        $total_records = self::$db->query($consulta)->getNumRows();   
+        return array(
+            'data' => $record,
+            'total_filas' => $total_records,
+            'pager' => $pager->makeLinks($pagina,$filas_por_pagina,$total_records)
+        );
+    }
+    
+    public static function queryResult($consulta, $modo){
+        self::$db = Database::connect();
+        $builder = self::$db->query($consulta);
+
+        $resultado = match($modo){
+            1 => $builder->getResult(), //fila como arreglo
+            2 => $builder->getRow(), //fila como objeto
+            3 => $builder->getResultArray() //arreglo
+        };
+        return $resultado;
+    }
+
 
     public static function select(string $tabla, int $modo, string $select = "*", array $condicion = array(), string $order = "")
     {
