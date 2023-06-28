@@ -28,7 +28,7 @@ class Categorias extends BaseController
         return view('categorias/index',$data);
     }
 
-    public function store() {
+    public function guardar() {
 
         $rules = [
             'categoria' => 'required|string|max_length[150]',
@@ -64,7 +64,7 @@ class Categorias extends BaseController
                 $this->categoria_model->update($this->request->getPost('id'),$data);
     
                 return response()->setContentType('application/json')
-                        ->setStatusCode(201)
+                        ->setStatusCode(200)
                         ->setJSON([
                             'success' => true,
                             'message' => 'Categoría modificada satisfactoriamente'

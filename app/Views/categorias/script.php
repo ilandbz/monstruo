@@ -4,8 +4,9 @@
     var total_filas = 0;
     var filas_por_pagina = 10;
     var pagina_inicial = 1;
-    // let datos_configuracion = JSON.parse(localStorage.getItem("datos_configuracion"));
-    // var param_stand_url = datos_configuracion.param_stand_url;
+    //let datos_configuracion = JSON.parse(localStorage.getItem("datos_configuracion"));
+    //var param_stand_url = datos_configuracion.param_stand_url;
+    //var param_stand_url = datos_configuracion.param_stand_url;
     var modal_categoria_id;
     var buscar = "";
 
@@ -13,27 +14,33 @@
 
     $(document).ready(function(){
         //BUSCAR filtros
+        //param_categoria_id = ($('#categoria_id').val() == '') ? param_stand_url :  $('#categoria_id').val();
         $('#btn_buscar_categoria').on('click', function(){
-            // pagina = 1; //
-            // param_categoria_id = ($('#categoria_id').val() == '') ? param_stand_url :  $('#categoria_id').val();
-            // $("#tabla_categoria_id > tbody").remove();
 
-            // var ruta_url = base_url + 'index.php/WS_categorias/ws_select/' + pagina + '/' + filas_por_pagina + '/' + param_categoria_id;               
-            // console.log(ruta_url);
-            // $.getJSON(ruta_url)
-            //     .done(function (data) {
-            //         console.log(data);
-            //         carga = 1;//se usa para activar la pagina N. 1
-            //         total_filas = data.total_filas;
-            //         $("#lista_id_pagination > li").remove();
-            //         construir_paginacion(total_filas, filas_por_pagina, carga)
-                    
-            //         var numero_orden = filas_por_pagina*(pagina-1)+1;                    
-            //         (data.ws_select_categorias).forEach(function (repo) {
-            //             agregarFila(numero_orden, repo.codigo, repo.categoria, repo.categoria_id);
-            //             numero_orden ++;
-            //         });
-            // });
+            param_categoria_id = $('#categoria_id').val();
+
+            $.ajax({
+                dataType:'json',
+                url: '<?=base_url('wscategorias/todos')?>',
+                data: {
+                    page: pagina_inicial,
+                    paginacion: filas_por_pagina,
+                    categoria_id: param_categoria_id
+                },
+                success: function(data) {
+
+                    $(".tabla_fila").remove();
+                    $("#lista_id_pagination > li").remove();
+                    let carga =1;
+                    //js/mostruo/help.js
+                    construir_paginacion(data.total_filas,filas_por_pagina,carga)
+                    let numero_orden = 1;
+                    (data.data).forEach(function(repo) {
+                        agregarFila(numero_orden,repo)
+                        numero_orden++;
+                    });
+                }
+            })
         });
         
         //PAGINACION
@@ -184,14 +191,15 @@
         }
     });
 
-    function carga_inicial(){        
+    function carga_inicial(){      
+        param_categoria_id = $('#categoria_id').val();  
         $.ajax({
             dataType:'json',
             url: '<?=base_url('wscategorias/todos')?>',
             data: {
                 page: pagina_inicial,
                 paginacion: filas_por_pagina,
-                buscar: buscar
+                categoria_id: param_categoria_id
             },
             success: function(data) {
                 let carga =1;

@@ -3,7 +3,7 @@
 //CATEGORIAS
 $routes->group('categorias' ,['namespace' => 'App\Controllers'],function($routes){
     $routes->get('index', 'Categorias::index');
-    $routes->post('store', 'Categorias::store');
+    $routes->post('guardar', 'Categorias::guardar');
 });
 //WEBSERVICE CATEGORÍA
 $routes->group('wscategorias' ,['namespace' => 'App\Controllers\WebServices'],function($routes){

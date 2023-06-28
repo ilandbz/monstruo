@@ -18,13 +18,14 @@ class WSQueries
         
         $offset = ($pagina-1)*$filas_por_pagina;
 
-        $condicion = ($id != null || $id!= '') ? array('id' => $id) : array() ;
 
-        $builder = self::$db->table($tabla)->where('eliminado',0)->where($condicion);
+        $condicion = ($id != 0) ? array('id' => $id,'eliminado' => 0) : array( 'eliminado' => 0) ;
+
+        $builder = self::$db->table($tabla)->where($condicion);
 
         $record = $builder->get($filas_por_pagina,$offset)->getResult();
 
-        $total_records = self::$db->table($tabla)->where('eliminado',0)->where($condicion)->countAllResults();   
+        $total_records = self::$db->table($tabla)->where($condicion)->countAllResults();   
 
         return array(
             'data' => $record,
