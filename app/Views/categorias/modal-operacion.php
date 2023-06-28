@@ -5,7 +5,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title" id="titulo_modal">Registrar Categor&iacute;a</h4>
+                <h4 class="modal-title" id="titulo-modal">Registrar Categor&iacute;a</h4>
             </div>
             <div class="modal-body">
                 <form>

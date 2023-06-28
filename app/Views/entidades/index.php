@@ -73,8 +73,8 @@
     var total_filas = 0;
     var filas_por_pagina = 20;
     var pagina_inicial = 1;
-    let datos_configuracion = JSON.parse(localStorage.getItem("datos_configuracion"));    
-    var param_stand_url = datos_configuracion.param_stand_url;
+    //let datos_configuracion = JSON.parse(localStorage.getItem("datos_configuracion"));    
+    var param_stand_url = "";
     var tipo_entidad_id;
     var entidad_id_pro = '';
     var razon_social_pro = '';

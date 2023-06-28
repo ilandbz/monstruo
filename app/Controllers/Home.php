@@ -27,7 +27,7 @@ class Home extends BaseController
         return $this->response->redirect(site_url('/'));	
       }else{
 			$item = array(
-        'empleado_id'              => $registro['id'],
+        'empleado_id'     => $registro['id'],
         'nombres'		      => $registro['nombres'],
         'apepat'		      => $registro['apellido_paterno'],
         'apemat'		      => $registro['apellido_materno'],

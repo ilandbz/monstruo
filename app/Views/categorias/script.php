@@ -79,7 +79,7 @@
                     $('#modal_categoria').val(data.categoria);
                     $('#modal_codigo').val(data.codigo);
                     $('#modal_categoria_id').val(data.categoria_id);
-                    $('#titulo_modal').text('Modificar Categoria');
+                    $('#titulo-modal').text('Modificar Categoria');
                     $('#btn_guardar_categoria').text('Modificar');
                     $("#myModal").modal('show');                    
                 }
@@ -128,7 +128,7 @@
 
             $.ajax({    
                 method:'POST',
-                url:'<?=base_url('categorias/store')?>',
+                url:'<?=base_url('categorias/guardar')?>',
                 data: data,
                 success:function(data) {
                     if(data.success === true)
@@ -157,6 +157,8 @@
 
     $("#btn_nueva_categoria").click(function() {
         $('.alert-danger').remove();
+        limpiarDatos();
+        $('#titulo-modal').html('Registrar Categoría');
         $("#myModal").modal('show');
     }); 
 

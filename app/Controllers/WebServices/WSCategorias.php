@@ -15,7 +15,13 @@ class WSCategorias extends BaseController
         $filas_por_pagina = (int) $this->request->getGet('paginacion');
         $categoria_id = (int)$this->request->getGet('categoria_id');
 
-        $data = WSQueries::selectPagination('categorias',$pagina,$filas_por_pagina,$categoria_id);
+        $condicion = array( 'eliminado' => 0);
+        if($categoria_id != 0)
+        {
+            $condicion = array_merge($condicion, array('id' => $categoria_id));
+        }
+
+        $data = WSQueries::selectPagination('categorias',$pagina,$filas_por_pagina,$condicion,$categoria_id);
 
         echo json_encode(
             [
