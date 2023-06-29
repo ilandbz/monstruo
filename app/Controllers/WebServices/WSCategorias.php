@@ -21,7 +21,9 @@ class WSCategorias extends BaseController
             $condicion = array_merge($condicion, array('id' => $categoria_id));
         }
 
-        $data = WSQueries::selectPagination('categorias',$pagina,$filas_por_pagina,$condicion,$categoria_id);
+        $orderBy = "id ASC";
+
+        $data = WSQueries::selectPagination('categorias',$pagina,$filas_por_pagina,$condicion, $orderBy,$categoria_id);
 
         echo json_encode(
             [

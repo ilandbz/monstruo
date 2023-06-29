@@ -93,7 +93,7 @@
                 $.ajax({
                     type:'POST',
                     dataType:'json',
-                    url: '<?=base_url('wscategorias/deleteItem')?>',
+                    url: '<?=base_url('wscategorias/delete-item')?>',
                     data: {
                         id: categoria_id
                     },
@@ -225,6 +225,9 @@
         if(tabla.id != 1){
             fila += '<td align="center"><a id="'+tabla.id+'" class="btn btn-default btn-xs btn_modificar_categoria"><i class="glyphicon glyphicon-pencil"></i></a></td>';
             fila += '<td align="center"><a id="'+tabla.id+'" class="btn btn-danger btn-xs btn_eliminar_categoria"><i class="glyphicon glyphicon-remove"></i></a></td>';
+        } else {
+            fila += '<td></td>';
+            fila += '<td></td>';
         }
                 
         fila += '</tr>';

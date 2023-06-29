@@ -119,6 +119,6 @@ function construir_paginacion(total_filas, filas_por_pagina, carga) {
     var j = 1;
     for(i = 0; i < paginas; i++){
         var activer = ((i == 0) && (carga == 1)) ? 'active' : '';
-        $('.lista_paginacion').append('<li class="page-item ' + activer + '"><a class="pajaro">'+(i+1)+'</a></li>');
+        $('.lista_paginacion').append('<li class="page-item ' + activer + '" style="cursor:pointer"><a class="pajaro">'+(i+1)+'</a></li>');
     }
 }

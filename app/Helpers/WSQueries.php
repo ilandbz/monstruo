@@ -10,22 +10,29 @@ class WSQueries
 
     public function __construct() {}
 
-    public static function selectPagination(string $tabla,int $pagina,int $filas_por_pagina,array $condicion = array(),int $id): array
+    public static function selectPagination(string $tabla,int $pagina,int $filas_por_pagina,array $condicion = array(),string $orderby = "",int $id): array
     {
         self::$db = Database::connect();
+        
         $pager = service('pager');
         $offset = ($pagina-1)*$filas_por_pagina;
-       if ($condicion == '')
-            $condicion = array();
 
-        // $condiciones = [ "1"  => "1"];        
-        // $condiciones = array_merge($condiciones, $condicion);
-        $builder = self::$db->table($tabla)->where($condicion);
+        if($condicion == '') {
+            $condicion = array();
+        }
+
+        $builder = self::$db->table($tabla)->where($condicion)->orderBy($orderby);
         $record = $builder->get($filas_por_pagina,$offset)->getResult();
-        $total_records = self::$db->table($tabla)->where($condicion)->countAllResults();   
+        $total_records = self::$db->table($tabla)->where($condicion)->countAllResults();
+
+        $from = ($total_records > 0) ? (($pagina -1)*$filas_por_pagina + 1) : 1;
+        $to = ( $total_records  > 0) ? ($from + count($record) - 1): 1;
+
         return array(
             'data' => $record,
             'total_filas' => $total_records,
+            'from' => $from,
+            'to' => $to,
             'pager' => $pager->makeLinks($pagina,$filas_por_pagina,$total_records)
         );
     }
@@ -90,17 +97,14 @@ class WSQueries
     {
         self::$db = Database::connect();
 
-        $builder = self::$db->table($tabla)->where('eliminado',0)->like($condicion);
+        $builder = self::$db->table($tabla)->like($condicion);
 
         $record = $builder->get()->getResult();
 
         $rows = array();
         foreach($record as $fila)
         {
-            array_push($rows, array(
-                'id' => $fila->id,
-                'value' => $fila->categoria
-            ));
+            array_push($rows,$fila);
         }
 
         return $rows;
@@ -113,6 +117,15 @@ class WSQueries
         $builder = self::$db->table($tabla);
 
         return $builder->update($data,$condicion);
+    }
+
+    public static function eliminar(string $tabla,array $condicion = array()) 
+    {
+        self::$db = Database::connect();
+
+        $builder = self::$db->table($tabla);
+
+        return $builder->delete($condicion);
     }
     
 }

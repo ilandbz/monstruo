@@ -34,7 +34,7 @@
 
         <div class="col-md-1" >
             <button class="btn btn-default" type="button" id="btn_buscar_categoria" name="btn_buscar_categoria"><span class="glyphicon glyphicon-search"></span></button>   
-        </div>                   
+        </div>
     </div>
     <br>
     <div class="row-fluid">
